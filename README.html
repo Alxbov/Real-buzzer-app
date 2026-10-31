@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17152f">
+<title>BUZZER | Connect. Chat. Belong.</title>
+<style>
+:root{--navy:#17152f;--purple:#6045e8;--purple2:#8068ff;--ink:#20213a;--muted:#85869b;--line:#ececf3;--bg:#f6f6fb;--white:#fff;--gold:#ffc83d}
+*{box-sizing:border-box}body{margin:0;background:#e9e9f1;color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input{font:inherit}button{cursor:pointer}
+.app{width:100%;max-width:480px;min-height:100vh;margin:auto;background:var(--bg);position:relative;box-shadow:0 0 45px #17152f18;padding-bottom:82px}
+.top{background:var(--navy);color:white;padding:22px 20px 18px;border-radius:0 0 24px 24px}
+.topline{display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:10px;font-weight:850;font-size:23px;letter-spacing:1px}.logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(145deg,#fff 0 42%,var(--gold) 43% 60%,var(--purple2) 61%);color:var(--navy);display:grid;place-items:center;font-weight:950;font-size:22px}
+.top-actions{display:flex;gap:10px}.icon-btn{border:0;background:#ffffff18;color:white;width:38px;height:38px;border-radius:13px;font-size:18px}
+.greeting{margin-top:22px}.greeting small{color:#b9b5d5}.greeting h1{font-size:22px;margin:5px 0 0}.greeting p{margin:5px 0 0;color:#c9c6dc;font-size:13px}
+.search-wrap{padding:15px 18px 4px}.search{width:100%;border:1px solid var(--line);background:white;border-radius:14px;padding:13px 15px 13px 42px;outline:none;color:var(--ink);box-shadow:0 3px 12px #1b174008}.searchbox{position:relative}.searchbox:before{content:"⌕";position:absolute;left:15px;top:5px;font-size:25px;color:var(--muted)}
+.content{padding:12px 18px 18px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:13px 0 12px}.section-head h2{font-size:17px;margin:0}.text-btn{border:0;background:none;color:var(--purple);font-weight:700;font-size:13px}
+.quick{display:flex;gap:13px;overflow:auto;padding:2px 0 12px}.quick-item{min-width:65px;text-align:center;font-size:11px;color:#64657b}.avatar{width:49px;height:49px;border-radius:17px;background:linear-gradient(145deg,#e4dfff,#c9c2ff);display:grid;place-items:center;font-size:21px;margin:0 auto 6px;position:relative}.avatar.online:after{content:"";position:absolute;width:10px;height:10px;background:#35bd82;border:2px solid white;border-radius:50%;right:0;bottom:0}.avatar.purple{background:linear-gradient(145deg,#e7e1ff,#b8aaff)}.avatar.gold{background:linear-gradient(145deg,#fff1c7,#ffd66b)}.avatar.blue{background:linear-gradient(145deg,#d8edff,#9bc9ff)}.avatar.green{background:linear-gradient(145deg,#d8f6e9,#9be0c1)}
+.list{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden}.row{display:flex;align-items:center;gap:12px;padding:13px 13px;border-bottom:1px solid #f0f0f5;cursor:pointer}.row:last-child{border-bottom:0}.row .avatar{margin:0;flex:0 0 48px}.row-main{min-width:0;flex:1}.row-title{display:flex;justify-content:space-between;gap:8px;font-size:14px;font-weight:750}.row-sub{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:4px}.time{font-size:10px;color:var(--muted);font-weight:500;white-space:nowrap}.badge{background:var(--purple);color:white;border-radius:20px;min-width:19px;height:19px;display:grid;place-items:center;font-size:10px;padding:0 5px;margin-top:5px}
+.room-card{background:white;border:1px solid var(--line);border-radius:16px;padding:13px;display:flex;align-items:center;gap:12px;margin-bottom:10px}.room-icon{width:48px;height:48px;border-radius:15px;background:#eeeaff;display:grid;place-items:center;font-size:23px}.room-info{flex:1;min-width:0}.room-info strong{font-size:14px}.room-info p{font-size:12px;color:var(--muted);margin:4px 0}.join{border:0;border-radius:11px;background:#eeeaff;color:var(--purple);font-weight:750;padding:9px 13px;font-size:12px}.joined{background:#e5f7ef;color:#16865b}
+.pills{display:flex;gap:8px;overflow:auto;margin:5px 0 14px}.pill{border:1px solid var(--line);background:white;border-radius:30px;padding:8px 13px;color:#77788d;font-size:12px;white-space:nowrap}.pill.active{background:var(--purple);border-color:var(--purple);color:white}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:9px 8px calc(9px + env(safe-area-inset-bottom));z-index:5}.nav{border:0;background:none;color:#9292a5;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;min-width:48px}.nav span{font-size:20px}.nav.active{color:var(--purple);font-weight:800}.nav.add span{width:42px;height:42px;border-radius:15px;background:var(--purple);color:white;display:grid;place-items:center;font-size:26px;margin-top:-19px;box-shadow:0 5px 15px #6045e84a}
+.page{display:none}.page.active{display:block}.empty{padding:35px 20px;text-align:center;color:var(--muted);font-size:13px}.profile-card{background:white;border:1px solid var(--line);border-radius:20px;padding:22px;text-align:center}.profile-avatar{width:78px;height:78px;margin:0 auto 10px;border-radius:25px;background:linear-gradient(145deg,#ded6ff,#a99aff);display:grid;place-items:center;font-size:34px}.profile-card h2{margin:5px 0;font-size:19px}.profile-card p{color:var(--muted);font-size:13px;margin:5px}.stats{display:flex;justify-content:space-around;border-top:1px solid var(--line);margin-top:18px;padding-top:15px}.stats strong{display:block;font-size:17px}.stats small{color:var(--muted);font-size:11px}
+.overlay{position:fixed;inset:0;background:#11112480;display:none;align-items:flex-end;justify-content:center;z-index:10}.overlay.show{display:flex}.sheet{background:white;width:100%;max-width:480px;border-radius:24px 24px 0 0;padding:20px;max-height:88vh;overflow:auto}.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.sheet-head h3{margin:0}.close{border:0;background:#f0eff6;border-radius:10px;width:34px;height:34px;font-size:19px}.chatbox{height:45vh;overflow:auto;background:#f7f6fb;border-radius:15px;padding:12px}.bubble{max-width:82%;padding:10px 12px;border-radius:14px;background:white;margin:8px 0;font-size:13px}.bubble.mine{margin-left:auto;background:#e9e3ff}.chat-compose{display:flex;gap:8px;margin-top:10px}.chat-compose input{flex:1;min-width:0;border:1px solid var(--line);border-radius:12px;padding:12px;outline:none}.send{border:0;background:var(--purple);color:white;border-radius:12px;padding:0 17px;font-weight:700}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--navy);color:white;padding:11px 16px;border-radius:12px;font-size:12px;opacity:0;pointer-events:none;transition:.2s;z-index:20;white-space:nowrap}.toast.show{opacity:1}
+@media(min-width:600px){body{padding:20px 0}.app{min-height:calc(100vh - 40px);border-radius:28px;overflow:hidden}.bottom{bottom:20px;border-radius:0 0 28px 28px}.overlay{align-items:center}.sheet{border-radius:24px}}
+</style>
+</head>
+<body>
+<div id="authGate" style="position:fixed;inset:0;z-index:100;background:#17152f;display:grid;place-items:center;padding:22px;font-family:system-ui,Arial,sans-serif">
+  <form id="loginForm" style="width:100%;max-width:390px;background:#fff;border-radius:24px;padding:25px;box-shadow:0 20px 60px #0004">
+    <div style="display:flex;align-items:center;gap:10px;font-weight:900;font-size:24px;color:#17152f"><span style="display:grid;place-items:center;width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#fff 0 42%,#ffc83d 43% 60%,#8068ff 61%);">B</span> BUZZER</div>
+    <p style="color:#77788d;font-size:13px;margin:12px 0 20px">Founders' private test. Sign in with an account created by the project administrator.</p>
+    <label style="display:block;font-size:12px;font-weight:700;margin:12px 0 6px;color:#20213a">Email address</label>
+    <input id="loginEmail" type="email" required autocomplete="username" placeholder="you@example.com" style="width:100%;padding:13px;border:1px solid #e5e4ed;border-radius:12px;box-sizing:border-box">
+    <label style="display:block;font-size:12px;font-weight:700;margin:14px 0 6px;color:#20213a">Password</label>
+    <input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Your password" style="width:100%;padding:13px;border:1px solid #e5e4ed;border-radius:12px;box-sizing:border-box">
+    <button id="loginButton" type="submit" style="width:100%;margin-top:18px;padding:14px;border:0;border-radius:12px;background:#6045e8;color:white;font-weight:800">Sign in</button>
+    <p id="authMessage" role="status" style="font-size:12px;color:#b42318;min-height:18px;margin:12px 0 0"></p>
+  </form>
+</div>
+<div class="app" id="buzzerApp" style="display:none">
+  <header class="top">
+    <div class="topline">
+      <div class="brand"><div class="logo">B</div> BUZZER</div>
+      <div class="top-actions"><button class="icon-btn" aria-label="Search" onclick="focusSearch()">⌕</button><button class="icon-btn" aria-label="Notifications" onclick="toast('You are all caught up!')">♧</button></div>
+    </div>
+    <div class="greeting"><small>CONNECT. CHAT. BELONG.</small><h1 id="greeting">Good evening 👋</h1><p>Your conversations, communities and people in one place.</p></div>
+  </header>
+
+  <main>
+    <section class="page active" id="chats">
+      <div class="search-wrap"><div class="searchbox"><input class="search" id="searchInput" placeholder="Search chats, people or groups..." oninput="filterRows()"></div></div>
+      <div class="content">
+        <div class="section-head"><h2>People online</h2><button class="text-btn" onclick="showPage('discover')">Discover people</button></div>
+        <div class="quick">
+          <div class="quick-item" onclick="toast('Your status feature is coming soon')"><div class="avatar purple">＋</div>Your status</div>
+          <div class="quick-item"><div class="avatar online">👩🏽</div>Sarah</div>
+          <div class="quick-item"><div class="avatar online gold">👨🏾</div>Daniel</div>
+          <div class="quick-item"><div class="avatar online blue">👩🏻</div>Mary</div>
+          <div class="quick-item"><div class="avatar online green">👨🏻</div>James</div>
+          <div class="quick-item"><div class="avatar">👩🏿</div>Amina</div>
+        </div>
+        <div class="section-head"><h2>Founders' test chat</h2><span class="time">PRIVATE</span></div>
+        <div class="list" style="margin-bottom:18px">
+          <div class="row" onclick="openFounderChat()"><div class="avatar purple">🚀</div><div class="row-main"><div class="row-title">BUZZER Founders <span class="time">Live</span></div><div class="row-sub" id="founderPreview">Private space for the three founders</div></div><span style="color:#35bd82;font-size:11px;font-weight:800">● LIVE</span></div>
+        </div>
+        <div class="section-head"><h2>Recent chats</h2><button class="text-btn" onclick="toast('You are viewing your latest conversations')">See all</button></div>
+        <div class="list" id="chatList">
+          <div class="row" data-search="sarah family how was your day" onclick="openChat('Sarah','👩🏽','Hey! How was your day?')"><div class="avatar purple">👩🏽</div><div class="row-main"><div class="row-title">Sarah <span class="time">9:42 PM</span></div><div class="row-sub">Hey! How was your day?</div></div><span class="badge">2</span></div>
+          <div class="row" data-search="family group mama tomorrow" onclick="openChat('Family Group','👨‍👩‍👧','Mama: See you all tomorrow!')"><div class="avatar gold">👨‍👩‍👧</div><div class="row-main"><div class="row-title">Family Group <span class="time">8:58 PM</span></div><div class="row-sub">Mama: See you all tomorrow 🙏</div></div><span class="badge">1</span></div>
+          <div class="row" data-search="tech world technology update" onclick="openChat('Tech World','💻','The new update is looking good!')"><div class="avatar blue">💻</div><div class="row-main"><div class="row-title">Tech World <span class="time">8:20 PM</span></div><div class="row-sub">The new update is looking good!</div></div></div>
+          <div class="row" data-search="mary jane good night" onclick="openChat('Mary Jane','👩🏻','Good night, talk tomorrow.')"><div class="avatar">👩🏻</div><div class="row-main"><div class="row-title">Mary Jane <span class="time">7:50 PM</span></div><div class="row-sub">You: Good night, talk tomorrow.</div></div><span style="color:#24a879">✓✓</span></div>
+          <div class="row" data-search="gaming zone tournament" onclick="openChat('Gaming Zone','🎮','Who is joining the tournament?')"><div class="avatar green">🎮</div><div class="row-main"><div class="row-title">Gaming Zone <span class="time">6:32 PM</span></div><div class="row-sub">Who is joining the tournament?</div></div></div>
+          <div class="row" data-search="peace life motivation" onclick="openChat('Peace & Life','🌅','One step at a time. Keep going!')"><div class="avatar gold">🌅</div><div class="row-main"><div class="row-title">Peace & Life <span class="time">4:30 PM</span></div><div class="row-sub">One step at a time. Keep going!</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="rooms"><div class="content">
+      <div class="section-head"><h2>Chat rooms</h2><button class="text-btn" onclick="toast('Room creation will be added in a later build')">＋ Create room</button></div>
+      <div class="pills"><button class="pill active" onclick="setPill(this)">Popular</button><button class="pill" onclick="setPill(this)">Trending</button><button class="pill" onclick="setPill(this)">New</button><button class="pill" onclick="setPill(this)">My rooms</button></div>
+      <div id="roomList">
+        <div class="room-card"><div class="room-icon">💬</div><div class="room-info"><strong>General Talk</strong><p>Talk about anything, meet new people.</p><small>12.5K members</small></div><button class="join" onclick="joinRoom(this,'General Talk')">Join</button></div>
+        <div class="room-card"><div class="room-icon">🎧</div><div class="room-info"><strong>Music & Vibes</strong><p>Share music and discover new sounds.</p><small>8.7K members</small></div><button class="join" onclick="joinRoom(this,'Music & Vibes')">Join</button></div>
+        <div class="room-card"><div class="room-icon">🎬</div><div class="room-info"><strong>Movie Lovers</strong><p>Films, series and everything in between.</p><small>7.1K members</small></div><button class="join" onclick="joinRoom(this,'Movie Lovers')">Join</button></div>
+        <div class="room-card"><div class="room-icon">🎮</div><div class="room-info"><strong>Game Zone</strong><p>Gamers unite. Share tips and play.</p><small>10.3K members</small></div><button class="join" onclick="joinRoom(this,'Game Zone')">Join</button></div>
+        <div class="room-card"><div class="room-icon">🌱</div><div class="room-info"><strong>Life & Motivation</strong><p>Ideas, goals and positive conversations.</p><small>6.2K members</small></div><button class="join" onclick="joinRoom(this,'Life & Motivation')">Join</button></div>
+        <div class="room-card"><div class="room-icon">📚</div><div class="room-info"><strong>Learning Hub</strong><p>Ask questions and learn together.</p><small>3.4K members</small></div><button class="join" onclick="joinRoom(this,'Learning Hub')">Join</button></div>
+      </div>
+    </div></section>
+
+    <section class="page" id="groups"><div class="content">
+      <div class="section-head"><h2>Your groups</h2><button class="text-btn" onclick="toast('Group creation will be added in a later build')">＋ New group</button></div>
+      <div class="list">
+        <div class="row" onclick="openChat('Family Group','👨‍👩‍👧','Welcome everyone!')"><div class="avatar gold">👨‍👩‍👧</div><div class="row-main"><div class="row-title">Family Group</div><div class="row-sub">Family updates and plans</div></div></div>
+        <div class="row" onclick="openChat('Tech World','💻','Share your latest tech discovery.')"><div class="avatar blue">💻</div><div class="row-main"><div class="row-title">Tech World</div><div class="row-sub">Technology, ideas and learning</div></div></div>
+        <div class="row" onclick="openChat('Gaming Zone','🎮','Who is online?')"><div class="avatar green">🎮</div><div class="row-main"><div class="row-title">Gaming Zone</div><div class="row-sub">Games, friends and tournaments</div></div></div>
+      </div>
+    </div></section>
+
+    <section class="page" id="discover"><div class="content">
+      <div class="section-head"><h2>Discover</h2></div><p style="color:var(--muted);font-size:13px;margin-top:0">Find conversations and communities that interest you.</p>
+      <div class="room-card"><div class="room-icon">🌍</div><div class="room-info"><strong>People & Communities</strong><p>Explore public conversations.</p></div><button class="join" onclick="showPage('rooms')">Explore</button></div>
+      <div class="section-head"><h2>Suggested people</h2></div>
+      <div class="list">
+        <div class="row"><div class="avatar purple">👩🏽</div><div class="row-main"><div class="row-title">Amina K.</div><div class="row-sub">Interested in books and travel</div></div><button class="join" onclick="toast('Friend request sent')">Add</button></div>
+        <div class="row"><div class="avatar blue">👨🏾</div><div class="row-main"><div class="row-title">Daniel M.</div><div class="row-sub">Technology and photography</div></div><button class="join" onclick="toast('Friend request sent')">Add</button></div>
+        <div class="row"><div class="avatar gold">👩🏻</div><div class="row-main"><div class="row-title">Grace N.</div><div class="row-sub">Music and films</div></div><button class="join" onclick="toast('Friend request sent')">Add</button></div>
+      </div>
+    </div></section>
+
+    <section class="page" id="profile"><div class="content">
+      <div class="profile-card"><div class="profile-avatar">🙂</div><h2>Your Buzzer profile</h2><p>@yourusername</p><p>Make connections. Share ideas. Belong.</p><div class="stats"><div><strong>0</strong><small>Friends</small></div><div><strong>0</strong><small>Groups</small></div><div><strong>0</strong><small>Posts</small></div></div></div>
+      <div class="section-head"><h2>Settings</h2></div><div class="list">
+        <div class="row" onclick="toast('Profile editing will be available soon')"><div class="avatar">✏️</div><div class="row-main"><div class="row-title">Edit profile</div><div class="row-sub">Name, photo and bio</div></div><span>›</span></div>
+        <div class="row" onclick="toast('Privacy settings will be available soon')"><div class="avatar blue">🔒</div><div class="row-main"><div class="row-title">Privacy & security</div><div class="row-sub">Manage who can contact you</div></div><span>›</span></div>
+        <div class="row" onclick="toast('Help centre coming soon')"><div class="avatar gold">❔</div><div class="row-main"><div class="row-title">Help & support</div><div class="row-sub">Get help with BUZZER</div></div><span>›</span></div>
+        <div class="row" onclick="buzzerSignOut()"><div class="avatar">↪️</div><div class="row-main"><div class="row-title">Sign out</div><div class="row-sub">Leave this test account</div></div><span>›</span></div>
+      </div>
+    </div></section>
+  </main>
+
+  <nav class="bottom">
+    <button class="nav active" data-page="chats" onclick="showPage('chats',this)"><span>▣</span>Chats</button>
+    <button class="nav" data-page="rooms" onclick="showPage('rooms',this)"><span>◉</span>Rooms</button>
+    <button class="nav add" onclick="toast('Start a new chat: coming soon')"><span>＋</span></button>
+    <button class="nav" data-page="groups" onclick="showPage('groups',this)"><span>♧</span>Groups</button>
+    <button class
